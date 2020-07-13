@@ -26,6 +26,9 @@ public class CustomerClient {
         return restTemplate.getForEntity(apihost + path, CustomerDto.class, uuid.toString());
     }
 
+    public ResponseEntity<CustomerDto> saveNewCustomer(CustomerDto customerDto){
+         return restTemplate.postForEntity(apihost + CUSTOMER_PATH_V1 + "/add",customerDto, CustomerDto.class);
+    }
     public void setApihost(String apihost) {
         this.apihost = apihost;
     }
