@@ -1,11 +1,11 @@
 package guru.springframework.msscbreweryclient.web.client;
 
-import guru.springframework.msscbreweryclient.web.model.BeerDto;
 import guru.springframework.msscbreweryclient.web.model.CustomerDto;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -26,7 +26,7 @@ public class CustomerClient {
 
     public ResponseEntity<CustomerDto> getCustomerById(UUID uuid){
         String path = CUSTOMER_PATH_V1+"/{customerId}";
-        return restTemplate.getForEntity(apihost + path, CustomerDto.class, uuid.toString());
+        return restTemplate.getForEntity(apihost + path, CustomerDto.class, uuid);
     }
 
     public ResponseEntity<CustomerDto> saveNewCustomer(CustomerDto customerDto){
@@ -36,8 +36,14 @@ public class CustomerClient {
     public ResponseEntity<CustomerDto> updateCustomer(UUID uuid, CustomerDto customerDto){
 
        return restTemplate.exchange(apihost+CUSTOMER_PATH_V1+"/update/{id}" ,
-                HttpMethod.PUT,new HttpEntity<CustomerDto>(customerDto), CustomerDto.class,uuid.toString());
+                HttpMethod.PUT,new HttpEntity<CustomerDto>(customerDto), CustomerDto.class,uuid);
     }
+
+    public ResponseEntity<HttpStatus> deleteCustomer(UUID uuid){
+       return  restTemplate.exchange(apihost + CUSTOMER_PATH_V1 + "/delete/{id}", HttpMethod.DELETE,
+               null, HttpStatus.class, uuid);
+    }
+
     public void setApihost(String apihost) {
         this.apihost = apihost;
     }
