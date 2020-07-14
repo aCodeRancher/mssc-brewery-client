@@ -36,4 +36,12 @@ class CustomerClientTest {
         assertTrue(customerDtoResponseEntity.getBody().getId()!=null);
 
     }
+
+    @Test
+    public void updateCustomer(){
+        UUID id = UUID.randomUUID();
+        CustomerDto customerDto = CustomerDto.builder().name("Like To Change").build();
+        ResponseEntity<CustomerDto> customerDtoResponseEntity = client.updateCustomer(id, customerDto);
+        assertTrue(customerDtoResponseEntity.getBody().getName().equals("Like To Change"));
+    }
 }
