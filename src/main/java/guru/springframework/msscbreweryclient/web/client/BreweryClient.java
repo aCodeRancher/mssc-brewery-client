@@ -52,14 +52,14 @@ public class BreweryClient {
     }
 
     public URI saveNewCustomer(CustomerDto customerDto) {
-        return  restTemplate.postForLocation(apihost + CUSTOMER_PATH_V1, customerDto);
+        return  restTemplate.postForLocation(apihost + CUSTOMER_PATH_V1 +"/add", customerDto);
     }
 
     public void updateCustomer(UUID customerId, CustomerDto customerDto) {
-        restTemplate.put(apihost + CUSTOMER_PATH_V1 + customerId, customerDto);
+        restTemplate.put(apihost +CUSTOMER_PATH_V1 + "/update/"+ customerId, customerDto);
     }
 
     public void deleteCustomer(UUID customerId) {
-        restTemplate.delete(apihost + CUSTOMER_PATH_V1 + customerId);
+        restTemplate.delete(apihost + CUSTOMER_PATH_V1 + "/delete/"+ customerId);
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * Created by jt on 2019-08-08.
  */
-@Component
+//@Component
 public class BlockingRestTemplateCustomizer implements RestTemplateCustomizer {
 
     public ClientHttpRequestFactory clientHttpRequestFactory(){
